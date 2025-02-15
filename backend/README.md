@@ -1,4 +1,3 @@
-
 # Backend API Documentation
 
 ## Endpoint: Register User
@@ -69,3 +68,48 @@ This endpoint registers a new user. It validates that the required fields are pr
     "message": "Internal server error in registerUser"
   }
   ```
+
+## Endpoint: Login User
+
+**POST /api/users/login**
+
+### Description
+Logs in an existing user by verifying credentials and returns an authentication token.
+
+### Request Body
+| Field    | Type   | Required | Description          |
+|----------|--------|----------|----------------------|
+| email    | string | Yes      | User's email address |
+| password | string | Yes      | User's password      |
+
+#### Example Request
+```json
+{
+  "email": "john.doe@example.com",
+  "password": "yourpassword"
+}
+```
+
+### Responses
+
+#### Success Response (200 OK)
+```json
+{
+  "message": "User logged in sucessfully",
+  "token": "JWT_TOKEN"
+}
+```
+
+#### Error Responses
+
+- **Unauthorized (401 Unauthorized)**
+  ```json
+  {
+    "message": "Invalid Email or Password"
+  }
+
+- **Server Error (500 Internal Server Error)**
+  ```json
+  {
+    "message": "Internal server error in loginUser"
+  }

@@ -4,11 +4,7 @@ const createUser = async ({
     firstName, lastName , email, password
 }) =>{
 
-    if( !firstName || !email || !password ){
-        throw new Error("All fileds are required");
-    }
- 
-    const newUser = await User.create({
+     const newUser = await User.create({
        fullName:{
         firstName,
         lastName

@@ -42,4 +42,22 @@ const registerValidator = [
 ];
 
 
-module.exports = {validate , registerValidator}
+const loginValidator = [
+  body("email")
+  .isEmail()
+  .withMessage("Email should be in proper format")
+  .notEmpty()
+  .withMessage("Email is Required")
+  .isLength({ min: 5 })
+  .withMessage("Email Name should be atleast of 5 character"),
+
+  body("password")
+  .notEmpty()
+  .withMessage("Password is Required")
+  .isLength({ min: 8 })
+  .withMessage("Password should be atleast of 8 character"),
+
+]
+
+
+module.exports = {validate , registerValidator, loginValidator}

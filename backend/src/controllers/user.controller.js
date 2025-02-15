@@ -34,4 +34,39 @@ const registerUser = async (req,res) => {
 }  
 
 
-module.exports = { registerUser }
+const loginUser = async (req,res) => {
+   
+const {email,password}  = req.body
+
+const user = await User.findOne({email}).select('+password');
+
+
+if(!user){
+   return res.status(401).json("Invalid Email or Password")
+}
+
+try {
+   
+   const isMatch = await user.comparePassword(password);
+   
+
+   if(isMatch){
+   
+    const token = user.generateAuthToken()
+   // res.cookie("token", token)
+    
+    res.status(200).json({message:"User logged in sucessfully" , token:token  })
+   }
+else{
+   res.status(401).json("Invalid Email or Password")
+}
+
+
+} catch (error) {
+  console.log(error);
+   res.status(500).json("Internal server error in loginUser ")  
+}
+
+}
+
+module.exports = { registerUser , loginUser}
