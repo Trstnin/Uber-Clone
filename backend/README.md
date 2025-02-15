@@ -107,9 +107,79 @@ Logs in an existing user by verifying credentials and returns an authentication 
   {
     "message": "Invalid Email or Password"
   }
+  ```
 
 - **Server Error (500 Internal Server Error)**
   ```json
   {
     "message": "Internal server error in loginUser"
   }
+  ```
+
+## Endpoint: Get User Profile
+
+**GET /api/users/profile**
+
+### Description
+Retrieves the authenticated user's profile information.
+
+### Headers
+| Header             | Value     | Description                   |
+|--------------------|-----------|-------------------------------|
+| Authorization/Cookie | JWT_TOKEN | Token obtained after login    |
+
+### Responses
+
+#### Success Response (200 OK)
+```json
+{
+  "user": {
+    "id": "user_id",
+    "fullName": {
+      "firstName": "John",
+      "lastName": "Doe"
+    },
+    "email": "john.doe@example.com"
+    // ...other fields...
+  }
+}
+```
+
+#### Error Response
+
+- **Unauthorized (401 Unauthorized)**
+```json
+{
+  "message": "Unauthorized User"
+}
+```
+
+## Endpoint: Logout User
+
+**GET /api/users/logout**
+
+### Description
+Logs out the authenticated user by clearing the authentication cookie and blacklisting the token.
+
+### Headers
+| Header             | Value     | Description                   |
+|--------------------|-----------|-------------------------------|
+| Authorization/Cookie | JWT_TOKEN | Token obtained after login    |
+
+### Responses
+
+#### Success Response (200 OK)
+```json
+{
+  "message": "Loggout Succesfully"
+}
+```
+
+#### Error Response
+
+- **Server Error (500 Internal Server Error)**
+```json
+{
+  "message": "Internal server error in Logout"
+}
+```
