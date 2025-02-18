@@ -183,3 +183,76 @@ Logs out the authenticated user by clearing the authentication cookie and blackl
   "message": "Internal server error in Logout"
 }
 ```
+
+## Endpoint: Register Captain
+
+**POST /api/captains/register**
+
+### Description
+Registers a new captain. Validates provided fields, creates a captain record, hashes the password, and returns an authentication token along with captain details.
+
+### Request Body
+| Field      | Type   | Required | Description                                        |
+|------------|--------|----------|----------------------------------------------------|
+| fullName   | object | Yes      | Captain's full name                                |
+| fullName.firstName | string | Yes  | Captain's first name (min 3 characters)      |
+| fullName.lastName  | string | Yes  | Captain's last name (min 3 characters)       |
+| email      | string | Yes      | Captain's unique email address                     |
+| password   | string | Yes      | Captain's password                                 |
+| vehicle    | object | Yes      | Details about the captain's vehicle              |
+| vehicle.color      | string | Yes      | Color of the vehicle                        |
+| vehicle.plate      | string | Yes      | License plate number of the vehicle         |
+| vehicle.capacity   | number | Yes      | Seating capacity of the vehicle             |
+| vehicle.vehicleType| string | Yes      | Type of vehicle; valid values: "Car", "Bike", "Scooter" |
+
+#### Example Request
+```json
+{
+  "fullName": { "firstName": "Alice", "lastName": "Smith" },
+  "email": "alice.smith@example.com",
+  "password": "securepassword",
+  "vehicle": {
+    "color": "red",
+    "plate": "XYZ123",
+    "capacity": 4,
+    "vehicleType": "Car"
+  }
+}
+```
+
+### Responses
+
+#### Success Response (201 Created)
+```json
+{
+  "status": "success",
+  "message": "Captain registered successfully",
+  "token": "JWT_TOKEN",
+  "captain": {
+    "fullName": {
+      "firstName": "Alice",
+      "lastName": "Smith"
+    },
+    "email": "alice.smith@example.com",
+    // ...other fields...
+  }
+}
+```
+
+#### Error Responses
+
+- **Conflict (409 Conflict)**
+  ```json
+  {
+    "status": "error",
+    "message": "Captain already registered"
+  }
+  ```
+
+- **Server Error (500 Internal Server Error)**
+  ```json
+  {
+    "status": "error",
+    "message": "Internal server error in registerCaptain"
+  }
+  ```
