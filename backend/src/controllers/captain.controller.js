@@ -1,3 +1,4 @@
+const BlacklistToken = require("../models/blacklistToken.models");
 const Captain = require("../models/captain.models");
 const createCaptain = require("../services/captain.service");
 
@@ -56,4 +57,48 @@ const registerCaptain = async (req, res) => {
   }
 };
 
-module.exports = { registerCaptain };
+const loginCaptain = async (req,res) => {
+  const {email,password} = req.body
+
+  const user = await Captain.findOne({email}).select('+password');
+  
+  if(!user) return res.status(400).json("Invalid Email or Password");
+
+  try {
+    const isMatch = await user.comparePassword(password)
+    
+    if(isMatch){
+       const token = user.generateAuthToken();
+       res.cookie("token", token)
+       res.status(200).json({message:"Captain logged in sucessfully" , token:token })
+    }else{
+         res.status(400).json("Invalid Email or Password")
+    }
+
+    
+  } catch (error) {
+    console.log(error);
+    res.status(500).json("Internal server error in captain login")
+  }
+}
+
+const getCaptainProfile = async (req,res) =>{
+   
+  return res.status(201).json({captain:req.captain});
+
+}
+
+const logoutCaptain = async (req,res) =>{
+  try {
+    res.cookie("token")
+   const token = req.cookies.token || req.headers.authorization?.split(' ')[ 1 ];
+    await BlacklistToken.create({token})
+    res.status(200).json("Logout sucessfully");
+    
+  } catch (error) {
+    console.log(error)
+    res.status(500).json("Internal server error in logout captain")
+  }
+}
+
+module.exports = { registerCaptain , loginCaptain, logoutCaptain,getCaptainProfile};

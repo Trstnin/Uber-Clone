@@ -186,7 +186,7 @@ Logs out the authenticated user by clearing the authentication cookie and blackl
 
 ## Endpoint: Register Captain
 
-**POST /api/captains/register**
+**POST /api/captain/register**
 
 ### Description
 Registers a new captain. Validates provided fields, creates a captain record, hashes the password, and returns an authentication token along with captain details.
@@ -254,5 +254,119 @@ Registers a new captain. Validates provided fields, creates a captain record, ha
   {
     "status": "error",
     "message": "Internal server error in registerCaptain"
+  }
+  ```
+
+## Endpoint: Login Captain
+
+**POST /api/captain/login**
+
+### Description
+Logs in an existing captain by verifying credentials. Sets the authentication token as a cookie and returns it in the response.
+
+### Request Body
+| Field    | Type   | Required | Description          |
+|----------|--------|----------|----------------------|
+| email    | string | Yes      | Captain's email address |
+| password | string | Yes      | Captain's password      |
+
+#### Example Request
+```json
+{
+  "email": "alice.smith@example.com",
+  "password": "securepassword"
+}
+```
+
+### Responses
+
+#### Success Response (200 OK)
+```json
+{
+  "message": "Captain logged in sucessfully",
+  "token": "JWT_TOKEN"
+}
+```
+
+#### Error Responses
+
+- **Unauthorized (400 Bad Request)**
+  ```json
+  {
+    "message": "Invalid Email or Password"
+  }
+  ```
+
+- **Server Error (500 Internal Server Error)**
+  ```json
+  {
+    "message": "Internal server error in captain login"
+  }
+  ```
+
+## Endpoint: Get Captain Profile
+
+**GET /api/captain/profile**
+
+### Description
+Retrieves the authenticated captain's profile details.
+
+### Headers
+| Header                | Value      | Description                         |
+|-----------------------|------------|-------------------------------------|
+| Authorization/Cookie  | JWT_TOKEN  | Token obtained from login           |
+
+### Responses
+
+#### Success Response (201 Created)
+```json
+{
+  "captain": {
+    "fullName": {
+      "firstName": "Alice",
+      "lastName": "Smith"
+    },
+    "email": "alice.smith@example.com"
+    // ...other fields...
+  }
+}
+```
+
+#### Error Response
+
+- **Unauthorized (401 Unauthorized)**
+  ```json
+  {
+    "message": "Unauthorized User"
+  }
+  ```
+
+## Endpoint: Logout Captain
+
+**GET /api/captain/logout**
+
+### Description
+Logs out the authenticated captain by clearing the authentication cookie and blacklisting the token.
+
+### Headers
+| Header                | Value      | Description                         |
+|-----------------------|------------|-------------------------------------|
+| Authorization/Cookie  | JWT_TOKEN  | Token obtained from login           |
+
+### Responses
+
+#### Success Response (200 OK)
+```json
+{
+  "message": "Logout sucessfully"
+}
+```
+
+#### Error Response
+
+- **Server Error (500 Internal Server Error)**
+  ```json
+  {
+    "message": "Internal server error in logout captain"
   }
   ```

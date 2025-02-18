@@ -96,4 +96,6 @@ const captainRegisterValidator = [
     .withMessage("You have to provide the type of your vechile"),
 ];
 
+
+
 module.exports = { validate, registerValidator, loginValidator,captainRegisterValidator };
