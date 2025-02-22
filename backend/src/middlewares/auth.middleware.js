@@ -11,7 +11,8 @@ const authUser = async (req,res,next) =>{
     res.status(401).json("Unauthorized User");
  }
  
-const isBlacklisted = await isBlacklisted.findOne({token:token})
+const isBlacklisted = await BlacklistToken.findOne({token:token})
+
 
 if(isBlacklisted){ 
      return res.status(401).json("Unauthorized User")
