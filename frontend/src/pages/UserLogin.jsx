@@ -35,12 +35,12 @@ const UserLogin = () => {
   return (
     <div className="p-7 h-screen flex flex-col justify-between">
       <div>
-        <img
-          className=" w-20 h-12  mb-5"
-          src="https://cdn-assets-us.frontify.com/s3/frontify-enterprise-files-us/eyJwYXRoIjoicG9zdG1hdGVzXC9hY2NvdW50c1wvODRcLzQwMDA1MTRcL3Byb2plY3RzXC8yN1wvYXNzZXRzXC9lZFwvNTUwOVwvNmNmOGVmM2YzMjFkMTA3YThmZGVjNjY1NjJlMmVmMzctMTYyMDM3Nzc0OC5haSJ9:postmates:9KZWqmYNXpeGs6pQy4UCsx5EL3qq29lhFS6e4ZVfQrs?width=2400"
-          alt=""
-        />
-        <form onSubmit={handleSubmit}>
+        <Link to={'/'}>
+        <h3 className="w-16 absolute left-3 mb-2 top-1 text-zinc-950 text-xl font-extrabold">YATRI</h3>
+       </Link>
+        
+       
+        <form onSubmit={handleSubmit} className="mt-3">
           <h3 className="text-lg font-medium mb-2">{"What's Your Name?"}</h3>
 
           <input

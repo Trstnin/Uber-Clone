@@ -33,12 +33,12 @@ const navigate = useNavigate()
   return (
     <div className="p-7 h-screen flex flex-col justify-between">
       <div>
-        <img
-          className=" w-20 h-15  mb-5"
-          src="https://www.svgrepo.com/show/505031/uber-driver.svg"
-          alt=""
-        />
-        <form onSubmit={handleSubmit}>
+        <Link to={'/'}>
+        <h3 className="w-16 absolute left-3 mb-2 top-1 text-zinc-950 text-xl font-extrabold">YATRI</h3>
+       </Link>
+       
+       
+        <form onSubmit={handleSubmit} className="mt-3">
           <h3 className="text-lg font-medium mb-2">{"What's your Email?"}</h3>
 
           <input
