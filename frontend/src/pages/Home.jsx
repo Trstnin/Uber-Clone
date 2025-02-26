@@ -15,14 +15,14 @@ const Home = () => {
   const [panel, setPanel] = useState(false);
   const panelRef = useRef(null);
   const panelCloseRef = useRef(null);
-  const [vehiclePanel, setVehiclePanel] = useState(false)
+  const [vehiclePanel, setVehiclePanel] = useState(false);
   const vehiclePanalRef = useRef(null);
-  const [confirmPanel, setConfirmPanel] = useState(false)
-  const confirmPanelRef = useRef(null)
-  const [vehicleFoundPanel, setVehicleFoundPanel] = useState(false)
-  const vechileFoundRef = useRef(null)
-  const [waitingForDriver, setWaitingForDriver] = useState(false)
-  const WaitingForDriverRef = useRef(null)
+  const [confirmPanel, setConfirmPanel] = useState(false);
+  const confirmPanelRef = useRef(null);
+  const [vehicleFoundPanel, setVehicleFoundPanel] = useState(false);
+  const vechileFoundRef = useRef(null);
+  const [waitingForDriver, setWaitingForDriver] = useState(false);
+  const WaitingForDriverRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,70 +50,65 @@ const Home = () => {
     }
   }, [panel]);
 
- useGSAP(() =>{
-  if(vehiclePanel){
-    gsap.to(vehiclePanalRef.current, {
-      transform:'translateY(0)'
-    })
-  }else{
-    gsap.to(vehiclePanalRef.current,{
-      transform:'translateY(100%)'
-    })
-  }
- 
- },[vehiclePanel])
+  useGSAP(() => {
+    if (vehiclePanel) {
+      gsap.to(vehiclePanalRef.current, {
+        transform: "translateY(0)",
+      });
+    } else {
+      gsap.to(vehiclePanalRef.current, {
+        transform: "translateY(100%)",
+      });
+    }
+  }, [vehiclePanel]);
 
- useGSAP(() =>{
-  if(confirmPanel){
-    gsap.to(confirmPanelRef.current, {
-      transform:'translateY(0)'
-    })
-  }else{
-    gsap.to(confirmPanelRef.current,{
-      transform:'translateY(100%)'
-    })
-  }
- 
- },[confirmPanel])
+  useGSAP(() => {
+    if (confirmPanel) {
+      gsap.to(confirmPanelRef.current, {
+        transform: "translateY(0)",
+      });
+    } else {
+      gsap.to(confirmPanelRef.current, {
+        transform: "translateY(100%)",
+      });
+    }
+  }, [confirmPanel]);
 
- useGSAP(() =>{
-  if(vehicleFoundPanel){
-    gsap.to(vechileFoundRef.current, {
-      transform:'translateY(0)'
-    })
-  }else{
-    gsap.to(vechileFoundRef.current,{
-      transform:'translateY(100%)'
-    })
-  }
- 
- },[vehicleFoundPanel])
+  useGSAP(() => {
+    if (vehicleFoundPanel) {
+      gsap.to(vechileFoundRef.current, {
+        transform: "translateY(0)",
+      });
+    } else {
+      gsap.to(vechileFoundRef.current, {
+        transform: "translateY(100%)",
+      });
+    }
+  }, [vehicleFoundPanel]);
 
- useGSAP(() =>{
-  if(waitingForDriver){
-    gsap.to(WaitingForDriverRef.current, {
-      transform:'translateY(0)'
-    })
-  }else{
-    gsap.to(WaitingForDriverRef.current,{
-      transform:'translateY(100%)'
-    })
-  }
- 
- },[waitingForDriver])
+  useGSAP(() => {
+    if (waitingForDriver) {
+      gsap.to(WaitingForDriverRef.current, {
+        transform: "translateY(0)",
+      });
+    } else {
+      gsap.to(WaitingForDriverRef.current, {
+        transform: "translateY(100%)",
+      });
+    }
+  }, [waitingForDriver]);
 
   return (
     <div className="h-screen relative overflow-hidden">
-      
-      <h3 className="w-16 absolute left-3 mb-2 top-3 text-zinc-950 text-xl font-extrabold">YATRI</h3>
-     
+      <h3 className="w-16 absolute left-3 mb-2 top-3 text-zinc-950 text-xl font-extrabold">
+        YATRI
+      </h3>
 
       <div className="h-screen w-screen">
-
         {/* Image for temporary */}
         <img
           className="h-full w-full object-cover"
-          src="https://imgs.search.brave.com/62fJHBYZQFthft27Cf6cZwiXeXzXCfJDfUWj8KIy7yQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/Z3Jvb3Z5cG9zdC5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjAvMDcvR29vZ2xl/LVBob3Rvcy1tYXAt/c2VhcmNoLW1hcC12/aWV3LXpvb20tb3V0/LnBuZw"
+          src="https://i.pinimg.com/736x/1b/af/a1/1bafa1872f09a318f36eddc6c538c0c8.jpg"
           alt=""
         />
       </div>
@@ -162,26 +157,46 @@ const Home = () => {
         </div>
 
         <div ref={panelRef} className="h-0 bg-white ">
-          <LocationSerachPanel setPanel={setPanel} setVehiclePanel={setVehiclePanel} />
+          <LocationSerachPanel
+            setPanel={setPanel}
+            setVehiclePanel={setVehiclePanel}
+          />
         </div>
       </div>
-       
-      <div ref={vehiclePanalRef}   className=" z-10 fixed bottom-0 translate-y-full px-3 py-8 bg-white w-full pt-10">
-       <VehiclePanel setVehiclePanel={setVehiclePanel} setConfirmPanel={setConfirmPanel}  /> 
-      </div>
- 
-      <div ref={confirmPanelRef} className=" z-10 fixed bottom-0 translate-y-full px-3 py-6 bg-white w-full pt-10">
-       <ConfirmedVehicle setConfirmPanel={setConfirmPanel} setVehicleFoundPanel={setVehicleFoundPanel}/>
+
+      <div
+        ref={vehiclePanalRef}
+        className=" z-10 fixed bottom-0 translate-y-full px-3 py-8 bg-white w-full pt-10"
+      >
+        <VehiclePanel
+          setVehiclePanel={setVehiclePanel}
+          setConfirmPanel={setConfirmPanel}
+        />
       </div>
 
-      <div ref={vechileFoundRef} className=" z-10 fixed bottom-0 translate-y-full px-3 py-6 bg-white w-full pt-10">
-         <LookingforDriver setVehicleFoundPanel={setVehicleFoundPanel} />
+      <div
+        ref={confirmPanelRef}
+        className=" z-10 fixed bottom-0 translate-y-full px-3 py-6 bg-white w-full pt-10"
+      >
+        <ConfirmedVehicle
+          setConfirmPanel={setConfirmPanel}
+          setVehicleFoundPanel={setVehicleFoundPanel}
+        />
       </div>
 
-      <div ref={WaitingForDriverRef} className=" z-10 fixed bottom-0 translate-y-full px-3 py-6 bg-white w-full pt-10">
-        <WaitingForDriver setWaitingForDriver={setWaitingForDriver}/>
+      <div
+        ref={vechileFoundRef}
+        className=" z-10 fixed bottom-0 translate-y-full px-3 py-6 bg-white w-full pt-10"
+      >
+        <LookingforDriver setVehicleFoundPanel={setVehicleFoundPanel} />
       </div>
 
+      <div
+        ref={WaitingForDriverRef}
+        className=" z-10 fixed bottom-0 translate-y-full px-3 py-6 bg-white w-full pt-10"
+      >
+        <WaitingForDriver setWaitingForDriver={setWaitingForDriver} />
+      </div>
     </div>
   );
 };
